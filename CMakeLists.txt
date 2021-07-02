@@ -6,3 +6,17 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(sim-framework
     src/main.cpp
 )
+
+add_library(sim
+    src/sim/sim.cpp
+)
+
+target_include_directories(sim PRIVATE include)
+
+add_executable(example
+    example/main.cpp
+)
+
+target_link_libraries(example sim)
+
+target_include_directories(example PRIVATE include)
