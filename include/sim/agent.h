@@ -7,12 +7,12 @@
 
 class Agent {
     public:
-        Agent(std::string agentName)
+        explicit Agent(std::string agentName)
         : agentName(agentName) {};
 
         virtual void tick() {};
 
-        std::string getAgentName() {
+        std::string getAgentName() const {
             return this->agentName;
         }
     private:
