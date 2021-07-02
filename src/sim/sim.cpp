@@ -33,7 +33,7 @@ void Sim::run() {
     std::cout << "Simulation durration: " << diff.count() << " s\n";
 }
 
-void Sim::outputState() {
+void Sim::outputState() const {
     std::cout << "== State ==" << std::endl;
     for(auto* agent: this->agents) {
         std::cout << "State for agent: " << agent->getAgentName() << std::endl;
@@ -44,7 +44,7 @@ void Sim::outputState() {
     std::cout << "====" << std::endl;
 }
 
-std::string Sim::parseStateVariable(StateVariable stateVariable) {
+std::string Sim::parseStateVariable(StateVariable stateVariable) const {
     if(stateVariable.type == StateVariableTypes::Int) {
         int value = *static_cast<int*>(stateVariable.value);
         return std::to_string(value);

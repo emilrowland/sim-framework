@@ -27,6 +27,6 @@ class Sim {
         int currentTime;
         std::vector<Agent*> agents;
 
-        void outputState();
-        std::string parseStateVariable(StateVariable stateVariable);
+        void outputState() const;
+        std::string parseStateVariable(StateVariable stateVariable) const;
 };
