@@ -7,7 +7,7 @@
 
 class Agent {
     public:
-        explicit Agent(std::string agentName)
+        Agent(std::string agentName)
         : agentName(agentName) {};
 
         virtual void tick() {};

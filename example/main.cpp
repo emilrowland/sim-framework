@@ -7,7 +7,7 @@
 
 class MyAgent : public Agent {
     public:
-        MyAgent(std::string agentName) : Agent(agentName) {
+        explicit MyAgent(const std::string& agentName) : Agent(agentName) {
             this->money = 100;
         };
 
