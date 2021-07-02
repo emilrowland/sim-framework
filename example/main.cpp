@@ -5,32 +5,52 @@
 #include <sim/sim.h>
 #include <sim/agent.h>
 
-class MyAgent : public Agent {
+class AgentStore : public Agent {
     public:
-        explicit MyAgent(const std::string& agentName) : Agent(agentName) {
+        explicit AgentStore(const std::string& agentName) : Agent(agentName) {
             this->money = 100;
-            this->registerStateVariable(&this->money, "money", "int");
+            this->registerStateVariable(&this->money, "money", StateVariableTypes::Int);
         };
 
-        void tick() {
-            std::cout << "Eating!" << std::endl;
-            if(this->getAgentName() == "Adam"){
-                this->money -= 10;
-            }
+        void tick() {}
+
+        void buy(int cost) {
+            this->money += cost;
         }
     private:
         int money;
 };
 
+class AgentCustomer : public Agent {
+    public:
+        explicit AgentCustomer(const std::string& agentName, AgentStore* store) : Agent(agentName) {
+            this->store = store;
+            this->money = 100;
+            this->registerStateVariable(&this->money, "money", StateVariableTypes::Int);
+        };
+
+        void tick() {
+            if(this->money >= 10){
+                this->store->buy(10);
+                this->money -= 10;
+            }
+        }
+    private:
+        int money;
+        AgentStore* store;
+};
+
 int main() {
     Sim* simInstance = new Sim("My Sim");
-    simInstance->setStopTime(1);
+    simInstance->setStopTime(5);
 
     //Seting up agents
-    MyAgent* agentAdam = new MyAgent("Adam");
-    simInstance->registerAgent(agentAdam);
-    MyAgent* agentBob = new MyAgent("Bob");
-    simInstance->registerAgent(agentBob);
+    AgentStore* store = new AgentStore("store");
+    simInstance->registerAgent(store);
+    AgentCustomer* customer1 = new AgentCustomer("customer1", store);
+    simInstance->registerAgent(customer1);
+    AgentCustomer* customer2 = new AgentCustomer("customer2", store);
+    simInstance->registerAgent(customer2);
 
     simInstance->run();
 }

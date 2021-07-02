@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+
 #include "sim/agent.h"
 
 class Sim {
@@ -27,4 +28,5 @@ class Sim {
         std::vector<Agent*> agents;
 
         void outputState();
+        std::string parseStateVariable(StateVariable stateVariable);
 };

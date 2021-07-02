@@ -3,6 +3,10 @@
 
 #include "sim/agent.h"
 
-void Agent::registerStateVariable(void* variable, std::string name, std::string type) {
-    this->stateVariables.push_back(variable);
+void Agent::registerStateVariable(void* variable, std::string name, StateVariableTypes type) {
+    StateVariable state;
+    state.value = variable;
+    state.name = name;
+    state.type = type;
+    this->stateVariables.push_back(state);
 }

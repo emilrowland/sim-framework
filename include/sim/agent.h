@@ -6,6 +6,14 @@
 #include <string>
 #include <vector>
 
+enum StateVariableTypes {Int};
+
+struct StateVariable {
+    void* value;
+    std::string name;
+    StateVariableTypes type;
+};
+
 class Agent {
     public:
         Agent(std::string agentName)
@@ -17,12 +25,12 @@ class Agent {
             return this->agentName;
         }
 
-        std::vector<void*> getStateVariables() const {
+        std::vector<StateVariable> getStateVariables() const {
             return this->stateVariables;
         }
     private:
         std::string agentName;
-        std::vector<void*> stateVariables;
+        std::vector<StateVariable> stateVariables;
     protected:
-        void registerStateVariable(void* variable, std::string name, std::string type);
+        void registerStateVariable(void* variable, std::string name, StateVariableTypes type);
 };
