@@ -9,6 +9,7 @@ add_executable(sim-framework
 
 add_library(sim
     src/sim/sim.cpp
+    src/sim/agent.cpp
 )
 
 target_include_directories(sim PRIVATE include)

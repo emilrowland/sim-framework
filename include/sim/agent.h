@@ -4,6 +4,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 class Agent {
     public:
@@ -15,6 +16,13 @@ class Agent {
         std::string getAgentName() const {
             return this->agentName;
         }
+
+        std::vector<void*> getStateVariables() const {
+            return this->stateVariables;
+        }
     private:
         std::string agentName;
+        std::vector<void*> stateVariables;
+    protected:
+        void registerStateVariable(void* variable, std::string name, std::string type);
 };

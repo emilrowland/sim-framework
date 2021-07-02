@@ -9,10 +9,14 @@ class MyAgent : public Agent {
     public:
         explicit MyAgent(const std::string& agentName) : Agent(agentName) {
             this->money = 100;
+            this->registerStateVariable(&this->money, "money", "int");
         };
 
         void tick() {
             std::cout << "Eating!" << std::endl;
+            if(this->getAgentName() == "Adam"){
+                this->money -= 10;
+            }
         }
     private:
         int money;

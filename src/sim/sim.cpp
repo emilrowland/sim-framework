@@ -28,6 +28,10 @@ void Sim::outputState() {
     std::cout << "== State ==" << std::endl;
     for(auto* agent: this->agents) {
         std::cout << "State for agent: " << agent->getAgentName() << std::endl;
+        for(auto* state: agent->getStateVariables()) {
+            int value = *static_cast<int*>(state);
+            std::cout << value << std::endl; 
+        }
     }
     
     std::cout << "====" << std::endl;
