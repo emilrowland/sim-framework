@@ -11,15 +11,24 @@ Sim::Sim(std::string simName) {
 }
 
 void Sim::run() {
-    std::cout << "Running simulation: " << this->getSimName() << std::endl;
+    std::cout << "Running simulation: " << this->simName << std::endl;
     //Execute simulation
     while(this->currentTime < this->stopTime) {
         std::cout << "Simulation tick: " << this->currentTime << std::endl;
+        for(auto* agent: this->agents) {
+           agent->tick();
+        }
         this->currentTime++;
     }
     std::cout << "Simulation ended" << std::endl;
+    this->outputState();
 }
 
-std::string Sim::getSimName() {
-    return this->simName;
+void Sim::outputState() {
+    std::cout << "== State ==" << std::endl;
+    for(auto* agent: this->agents) {
+        std::cout << "State for agent: " << agent->getAgentName() << std::endl;
+    }
+    
+    std::cout << "====" << std::endl;
 }
