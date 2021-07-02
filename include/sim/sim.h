@@ -6,7 +6,16 @@
 class Sim {
     public:
         Sim(std::string simName);
+
+        void run();
+
+        void setStopTime(int stopTime) {
+            this->stopTime = stopTime;
+        };
+
         std::string getSimName();
     private:
         std::string simName;
+        int stopTime;
+        int currentTime;
 };

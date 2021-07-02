@@ -6,5 +6,6 @@
 
 int main() {
     Sim* simInstance = new Sim("My Sim");
-    std::cout << simInstance->getSimName() << std::endl;
+    simInstance->setStopTime(1);
+    simInstance->run();
 }
