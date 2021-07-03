@@ -6,6 +6,9 @@
 #include <string>
 #include <vector>
 
+// Forward declaration
+class Sim;
+
 enum StateVariableTypes {Int};
 
 struct StateVariable {
@@ -21,6 +24,10 @@ class Agent {
 
         virtual void tick() {};
 
+        void setSimInstance(Sim* simInstance) {
+            this->simInstance = simInstance;
+        }
+
         std::string getAgentName() const {
             return this->agentName;
         }
@@ -28,9 +35,13 @@ class Agent {
         std::vector<StateVariable> getStateVariables() const {
             return this->stateVariables;
         }
+
     private:
         std::string agentName;
         std::vector<StateVariable> stateVariables;
+
     protected:
+        Sim* simInstance;
+
         void registerStateVariable(void* variable, std::string name, StateVariableTypes type);
 };

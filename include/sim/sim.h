@@ -8,6 +8,9 @@
 
 #include "sim/agent.h"
 
+// Forward declaration
+class Reporter;
+
 class Sim {
     public:
         Sim(std::string simName);
@@ -19,6 +22,7 @@ class Sim {
         };
 
         void registerAgent(Agent* agent) {
+            agent->setSimInstance(this);
             this->agents.push_back(agent);
         };
     private:
@@ -26,6 +30,8 @@ class Sim {
         int stopTime;
         int currentTime;
         std::vector<Agent*> agents;
+        Reporter* reporter;
+
 
         void outputState() const;
         std::string parseStateVariable(StateVariable stateVariable) const;

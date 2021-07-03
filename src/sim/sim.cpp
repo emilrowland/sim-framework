@@ -7,9 +7,12 @@
 #include <string>
 #include <chrono>
 
+#include "reporter.h"
+
 Sim::Sim(std::string simName) {
     this->simName = simName;
     this->currentTime = 0;
+    this->reporter = new Reporter(simName);
 }
 
 void Sim::run() {

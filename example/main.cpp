@@ -12,8 +12,6 @@ class AgentStore : public Agent {
             this->registerStateVariable(&this->money, "money", StateVariableTypes::Int);
         };
 
-        void tick() {}
-
         void buy(int cost) {
             this->money += cost;
         }
@@ -41,7 +39,7 @@ class AgentCustomer : public Agent {
 };
 
 int main() {
-    Sim* simInstance = new Sim("My Sim");
+    Sim* simInstance = new Sim("Store simulator");
     simInstance->setStopTime(5);
 
     //Seting up agents
