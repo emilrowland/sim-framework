@@ -21,12 +21,15 @@ void Sim::run() {
     this->outputState();
     //Execute simulation
     while(this->currentTime < this->stopTime) {
+        this->currentTime++;
         std::cout << "Simulation tick: " << this->currentTime << std::endl;
         for(auto* agent: this->agents) {
            agent->tick();
         }
-        this->outputState();
-        this->currentTime++;
+        if(this->currentTime < this->stopTime) { //Don't output on last tick
+            this->outputState();
+        }
+        
     }
     std::cout << "Simulation ended" << std::endl;
     this->outputState();
@@ -40,14 +43,15 @@ void Sim::outputState() const {
     std::cout << "== State ==" << std::endl;
     for(auto* agent: this->agents) {
         std::cout << "State for agent: " << agent->getAgentName() << std::endl;
+        this->reporter->outputAgentStateVariables(agent->getAgentName(), this->currentTime, agent->getStateVariables());
         for(auto state: agent->getStateVariables()) {
-            std::cout << state.name << ": " << this->parseStateVariable(state) << std::endl; 
+            std::cout << state.name << ": " << Sim::parseStateVariable(state) << std::endl; 
         }
     }
     std::cout << "====" << std::endl;
 }
 
-std::string Sim::parseStateVariable(StateVariable stateVariable) const {
+const std::string Sim::parseStateVariable(StateVariable stateVariable) {
     if(stateVariable.type == StateVariableTypes::Int) {
         int value = *static_cast<int*>(stateVariable.value);
         return std::to_string(value);

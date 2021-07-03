@@ -4,10 +4,14 @@
 #pragma once
 
 #include <string>
+#include <vector>
+
+#include <sim/agent.h>
 
 class Reporter {
     public:
         Reporter(std::string simName);  
+        void outputAgentStateVariables(std::string agentName, int currentTime, std::vector<StateVariable> StateVariables);
     private:
         std::string simPath;
 };

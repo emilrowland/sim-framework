@@ -25,6 +25,8 @@ class Sim {
             agent->setSimInstance(this);
             this->agents.push_back(agent);
         };
+
+        static const std::string parseStateVariable(StateVariable stateVariable);
     private:
         std::string simName;
         int stopTime;
@@ -32,7 +34,5 @@ class Sim {
         std::vector<Agent*> agents;
         Reporter* reporter;
 
-
         void outputState() const;
-        std::string parseStateVariable(StateVariable stateVariable) const;
 };
