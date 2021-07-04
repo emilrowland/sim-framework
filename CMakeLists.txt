@@ -18,12 +18,12 @@ endif()
 
 
 add_library(sim
-    src/sim/sim.cpp
-    src/sim/agent.cpp
-    src/sim/reporter.cpp
+    lib/src/sim/sim.cpp
+    lib/src/sim/agent.cpp
+    lib/src/sim/reporter.cpp
 )
 
-target_include_directories(sim PRIVATE include)
+target_include_directories(sim PRIVATE lib/include)
 target_link_libraries(sim PRIVATE nlohmann_json::nlohmann_json)
 
 add_executable(example
@@ -33,4 +33,4 @@ add_executable(example
 
 target_link_libraries(example sim)
 
-target_include_directories(example PRIVATE include)
+target_include_directories(example PRIVATE lib/include)
