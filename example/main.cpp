@@ -41,6 +41,7 @@ class AgentCustomer : public Agent {
 int main() {
     Sim* simInstance = new Sim("Store simulator");
     simInstance->setStopTime(5);
+    simInstance->setSilentMode(false);
 
     //Seting up agents
     AgentStore* store = new AgentStore("store");

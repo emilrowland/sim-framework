@@ -21,6 +21,10 @@ class Sim {
             this->stopTime = stopTime;
         };
 
+        void setSilentMode(bool silentMode) {
+            this->silentMode = silentMode;
+        };
+
         void registerAgent(Agent* agent) {
             agent->setSimInstance(this);
             this->agents.push_back(agent);
@@ -30,9 +34,12 @@ class Sim {
     private:
         std::string simName;
         int stopTime;
+        bool silentMode;
+
         int currentTime;
         std::vector<Agent*> agents;
         Reporter* reporter;
 
-        void outputState() const;
+        void outputState();
+        void logInfo(std::string message);
 };

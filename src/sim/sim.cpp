@@ -11,18 +11,20 @@
 
 Sim::Sim(std::string simName) {
     this->simName = simName;
+    this->silentMode = false;
+
     this->currentTime = 0;
     this->reporter = new Reporter(simName);
 }
 
 void Sim::run() {
     auto startTime = std::chrono::high_resolution_clock::now();
-    std::cout << "Running simulation: " << this->simName << std::endl;
+    this->logInfo("Running simulation: " + this->simName);
     this->outputState();
     //Execute simulation
     while(this->currentTime < this->stopTime) {
         this->currentTime++;
-        std::cout << "Simulation tick: " << this->currentTime << std::endl;
+        this->logInfo("Simulation tick: " + this->currentTime);
         for(auto* agent: this->agents) {
            agent->tick();
         }
@@ -31,24 +33,24 @@ void Sim::run() {
         }
         
     }
-    std::cout << "Simulation ended" << std::endl;
+    this->logInfo("Simulation ended");
     this->outputState();
 
     auto endTime = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff = endTime-startTime;
-    std::cout << "Simulation durration: " << diff.count() << " s\n";
+    this->logInfo("Simulation durration: " + std::to_string(diff.count()));
 }
 
-void Sim::outputState() const {
-    std::cout << "== State ==" << std::endl;
+void Sim::outputState() {
+    this->logInfo("== State ==");
     for(auto* agent: this->agents) {
-        std::cout << "State for agent: " << agent->getAgentName() << std::endl;
+        this->logInfo("State for agent: " + agent->getAgentName());
         this->reporter->outputAgentStateVariables(agent->getAgentName(), this->currentTime, agent->getStateVariables());
         for(auto state: agent->getStateVariables()) {
-            std::cout << state.name << ": " << Sim::parseStateVariable(state) << std::endl; 
+            this->logInfo(state.name + ": " + Sim::parseStateVariable(state));
         }
     }
-    std::cout << "====" << std::endl;
+    this->logInfo("====");
 }
 
 const std::string Sim::parseStateVariable(StateVariable stateVariable) {
@@ -57,4 +59,10 @@ const std::string Sim::parseStateVariable(StateVariable stateVariable) {
         return std::to_string(value);
     }
     throw "Inavalid StateVariable type";
+}
+
+void Sim::logInfo(std::string message) {
+    if(!this->silentMode){
+        std::cout << message << std::endl;
+    }
 }
