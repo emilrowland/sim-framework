@@ -10,8 +10,8 @@
 
 class Reporter {
     public:
-        Reporter(std::string simName);  
-        void outputAgentStateVariables(std::string agentName, int currentTime, std::vector<StateVariable> StateVariables);
+        Reporter(const std::string simName);  
+        void outputAgentStateVariables(const std::string agentName, int currentTime, std::vector<StateVariable> StateVariables);
     private:
         std::string simPath;
 };
