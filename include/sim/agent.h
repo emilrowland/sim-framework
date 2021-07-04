@@ -9,7 +9,7 @@
 // Forward declaration
 class Sim;
 
-enum StateVariableTypes {Int};
+enum StateVariableTypes {Int, Float};
 
 struct StateVariable {
     void* value;
@@ -22,7 +22,7 @@ class Agent {
         Agent(std::string agentName)
         : agentName(agentName) {};
 
-        virtual void tick() {};
+        virtual void tick(int currentTime) {};
 
         void setSimInstance(Sim* simInstance) {
             this->simInstance = simInstance;

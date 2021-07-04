@@ -28,6 +28,7 @@ target_link_libraries(sim PRIVATE nlohmann_json::nlohmann_json)
 
 add_executable(example
     example/main.cpp
+    example/electric/electricSim.cpp
 )
 
 target_link_libraries(example sim)
