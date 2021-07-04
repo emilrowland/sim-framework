@@ -10,7 +10,7 @@
 
 #include <sim/sim.h>
 
-Reporter::Reporter(const std::string simName) {
+Reporter::Reporter(const std::string& simName) {
     this->simPath = "res/" + simName + "/";
 
     // Create new empty folder for the simulation
@@ -18,7 +18,7 @@ Reporter::Reporter(const std::string simName) {
     std::filesystem::create_directories(this->simPath);
 }
 
-void Reporter::outputAgentStateVariables(const std::string agentName, int currentTime, std::vector<StateVariable> StateVariables) {
+void Reporter::outputAgentStateVariables(const std::string& agentName, int currentTime, std::vector<StateVariable> StateVariables) {
     nlohmann::json j;
     j["_currentTime"] = currentTime;
     for(auto state: StateVariables) {
